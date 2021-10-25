@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'quizbrain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -10,7 +13,7 @@ class Quizzler extends StatelessWidget {
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: QuizPage(),
           ),
         ),
@@ -26,12 +29,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = <Icon>[];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
-  ];
-  List<bool> answers = [false, true, true];
   int questionNumber = 0;
 
   @override
@@ -43,10 +40,10 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                quizBrain.questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -58,7 +55,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: FlatButton(
               textColor: Colors.white,
               color: Colors.green,
@@ -71,7 +68,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (answers[questionNumber] == true) {
+                  if (quizBrain.answers[questionNumber] == true) {
                     scoreKeeper.add(
                       const Icon(
                         Icons.check,
@@ -94,7 +91,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: FlatButton(
               color: Colors.red,
               child: const Text(
@@ -106,7 +103,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (answers[questionNumber] == false) {
+                  if (quizBrain.answers[questionNumber] == false) {
                     scoreKeeper.add(
                       const Icon(
                         Icons.check,
