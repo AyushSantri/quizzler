@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quizbrain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -32,20 +33,27 @@ class _QuizPageState extends State<QuizPage> {
   int questionNumber = 0;
 
   void checkAnswer(bool ans) {
-    if (ans == true) {
-      scoreKeeper.add(
-        const Icon(
-          Icons.check,
-          color: Colors.green,
-        ),
-      );
+    if (questionNumber == 11) {
+      Alert(context: context, title: "RFLUTTER", desc: "Flutter is awesome.")
+          .show();
+      questionNumber = 0;
+      scoreKeeper.clear();
     } else {
-      scoreKeeper.add(
-        const Icon(
-          Icons.close,
-          color: Colors.red,
-        ),
-      );
+      if (ans == quizBrain.answers[questionNumber]) {
+        scoreKeeper.add(
+          const Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
+      } else {
+        scoreKeeper.add(
+          const Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+        );
+      }
     }
   }
 
@@ -86,7 +94,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  checkAnswer(quizBrain.answers[questionNumber]);
+                  checkAnswer(true);
                   questionNumber++;
                 });
               },
@@ -107,7 +115,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  checkAnswer(quizBrain.answers[questionNumber]);
+                  checkAnswer(false);
                   questionNumber++;
                 });
               },
