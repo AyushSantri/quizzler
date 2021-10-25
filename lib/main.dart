@@ -31,6 +31,24 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = <Icon>[];
   int questionNumber = 0;
 
+  void checkAnswer(bool ans) {
+    if (ans == true) {
+      scoreKeeper.add(
+        const Icon(
+          Icons.check,
+          color: Colors.green,
+        ),
+      );
+    } else {
+      scoreKeeper.add(
+        const Icon(
+          Icons.close,
+          color: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,21 +86,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (quizBrain.answers[questionNumber] == true) {
-                    scoreKeeper.add(
-                      const Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );
-                  } else {
-                    scoreKeeper.add(
-                      const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    );
-                  }
+                  checkAnswer(quizBrain.answers[questionNumber]);
                   questionNumber++;
                 });
               },
@@ -103,21 +107,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (quizBrain.answers[questionNumber] == false) {
-                    scoreKeeper.add(
-                      const Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );
-                  } else {
-                    scoreKeeper.add(
-                      const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    );
-                  }
+                  checkAnswer(quizBrain.answers[questionNumber]);
                   questionNumber++;
                 });
               },
